@@ -94,10 +94,16 @@ namespace Stiralka
         public DelegateCommand Start { get; }
         public DelegateCommand StopCommand { get; }
 
+        public bool Stiraet { get; set; }
+
         public StiralkaModel()
         {
             OtkritZakritLotok = new DelegateCommand(() =>
             {
+                if (Stiraet)
+                {
+                    return;
+                }
                 if (Lotok == LotokZakrit)
                 {
                     if (State == State.Y1)
@@ -151,11 +157,16 @@ namespace Stiralka
                         State = State.Y1;
                     }
                     Knopka = KnopkaVikl;
+                    VremyaStirki = 0;
                     return;
                 }
             });
             ViborVremeni = new DelegateCommand(() =>
             {
+                if (Stiraet)
+                {
+                    return;
+                }
                 if (State == State.Y2)
                 {
                     State = State.Y3;
@@ -208,6 +219,10 @@ namespace Stiralka
             });
             ZakritOtkritBaraban = new DelegateCommand(() =>
             {
+                if (Stiraet)
+                {
+                    return;
+                }
                 if (Baraban == BarabanZakrit)
                 {
                     if (State == State.Y1 ||
@@ -243,7 +258,15 @@ namespace Stiralka
             });
             Start = new DelegateCommand(async () =>
             {
+                if (Knopka == KnopkaVikl ||
+                 Baraban == BarabanOtkrit ||
+                 Lotok == LotokOtkrit)
+                {
+                    return;
+                }
+                Stiraet = true;
                 await Task.Run(() => TimerDown());
+                Stiraet = false;
             });
             StopCommand = new DelegateCommand(() =>
             {
@@ -267,6 +290,10 @@ namespace Stiralka
 
         public async void Stop()
         {
+            if (Knopka == KnopkaVikl)
+            {
+                return;
+            }
             VremyaStirki = 0;
             await Task.Run(() => 
             {
