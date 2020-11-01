@@ -5,8 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Stiralka"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="600">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Состояние:" FontSize="20"></Label>
+            <TextBlock Grid.Column="1" Text="{Binding State}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20"></TextBlock>
+        </Grid>
+        <Border Grid.Row="1" BorderBrush="DodgerBlue" BorderThickness="2" Margin="50 0 50 50">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Image Source="{Binding Lotok}" />
+                    <Button Opacity="0" Command="{Binding OtkritZakritLotok}"></Button>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Margin="10" Command="{Binding ViborVremeni}" Content="Выбор времени"></Button>
+                    <TextBox Grid.Row="1" Margin="10" FontSize="20" Text="{Binding VremyaStirki}"></TextBox>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Content="Деликатный" Margin="10" Command="{Binding Delikatnyi}"></Button>
+                        <Button Grid.Row="1" Content="Быстрая стирка" Margin="10" Command="{Binding BistrayaStirka}"></Button>
+                        <Button Grid.Row="2" Content="Еженедельный" Margin="10" Command="{Binding BistrayaStirka}"></Button>
+                    </Grid>
+                </Grid>
+                <Image Grid.Column="0" Grid.Row="1" Source="{Binding SlevaOtBarabana}"/>
+                <Grid  Grid.Column="1" Grid.Row="1"> 
+                    <Image Source="{Binding Baraban}"/>
+                    <Button Command="{Binding ZakritOtkritBaraban}" Opacity="0">
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Content="Старт" Margin="25" Command="{Binding Start}">
+                    </Button>
+                    <Button Grid.Row="1" Margin="25" Command="{Binding StopCommand}" Content="Стоп"></Button>
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="2">
+                    <Image Source="{Binding Knopka}"/>
+                    <Button Opacity="0" Command="{Binding VkluchitVikluchit}"/>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
